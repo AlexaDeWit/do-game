@@ -3,6 +3,8 @@ module DoGame
   , Sub (..)
   ) where
 
+import           FRP.Elerea.Simple
+import           Control.Monad     (forever, void)
 import qualified DoGame.Cmd as Cmd
 
 -- Event subscriptions for the DoGame runtime to listen to.
@@ -14,10 +16,21 @@ data Sub a
 newtype Scene a = Scene a
 
 -- The configuration for a game, namely the functions needed to power the runtime for your game
-data Game m a
-  = Game
+data GameLifecycle m a
+  = GameLifecycle
     { initConst     :: (m, Cmd.Cmd m a)
     , updateFn      :: a -> m -> (m, Cmd.Cmd m a)
     , viewFn        :: m -> Scene a
     , subscriptions :: Sub a
     }
+
+data Game m a
+  = Game
+    { model        :: m
+    , lifeCycle    :: GameLifecycle m a
+    , isDirtyModel :: Bool
+    }
+
+runGame :: GameLifecycle m a -> IO ()
+runGame lifeCycle@GameLifecycle{ initConst } = forever $ void $ pure 5 where
+  game = Game (fst initConst) lifeCycle True

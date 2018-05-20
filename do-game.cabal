@@ -63,10 +63,14 @@ library
 
   -- Other library packages from which modules are imported.
   build-depends:       base >=4.11 && <4.12
+                     , elerea
 
   -- Directories containing source files.
   hs-source-dirs:      src
 
   -- Base language which the package is written in.
   default-language:    Haskell2010
+
+  default-extensions:  NamedFieldPuns
+                    
 
