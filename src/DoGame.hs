@@ -13,6 +13,11 @@ import qualified DoGame.Cmd as Cmd
 data Sub a
   = Sub a
 
+data InputState
+  = InputState
+    {
+    }
+
 data Scene e a = Scene
 
 -- The configuration for a game, namely the functions needed to power the runtime for your game
@@ -29,6 +34,7 @@ data Game e m a
     { model        :: m
     , lifeCycle    :: GameLifecycle e m a
     , isDirtyModel :: Bool
+    , inputState   :: InputState
     }
 
 runGame :: GameLifecycle e m a -> IO ()
