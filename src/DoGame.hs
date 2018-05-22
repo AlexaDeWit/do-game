@@ -4,7 +4,9 @@ module DoGame
   ) where
 
 import           FRP.Elerea.Simple
-import           Control.Monad     (forever, void)
+import           Linear.V2             (V2)
+import           Control.Monad         (forever, void)
+import           DoGame.Input.Keyboard (Key(..))
 import qualified DoGame.Cmd as Cmd
 
 -- | Event subscriptions for the DoGame runtime to listen to.
@@ -15,7 +17,8 @@ data Sub a
 
 data InputState
   = InputState
-    {
+    { keysDown      :: [Key]
+    , mousePosition :: V2 Int
     }
 
 data Scene e a = Scene
