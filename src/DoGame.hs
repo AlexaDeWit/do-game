@@ -13,24 +13,24 @@ import qualified DoGame.Cmd as Cmd
 data Sub a
   = Sub a
 
-newtype Scene a = Scene a
+data Scene e a = Scene
 
 -- The configuration for a game, namely the functions needed to power the runtime for your game
-data GameLifecycle m a
+data GameLifecycle e m a
   = GameLifecycle
     { initConst     :: (m, Cmd.Cmd m a)
     , updateFn      :: a -> m -> (m, Cmd.Cmd m a)
-    , viewFn        :: m -> Scene a
+    , viewFn        :: m -> Scene e a
     , subscriptions :: Sub a
     }
 
-data Game m a
+data Game e m a
   = Game
     { model        :: m
-    , lifeCycle    :: GameLifecycle m a
+    , lifeCycle    :: GameLifecycle e m a
     , isDirtyModel :: Bool
     }
 
-runGame :: GameLifecycle m a -> IO ()
+runGame :: GameLifecycle e m a -> IO ()
 runGame lifeCycle@GameLifecycle{ initConst } = forever $ void $ pure 5 where
   game = Game (fst initConst) lifeCycle True
