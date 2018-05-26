@@ -10,6 +10,19 @@ import           Linear.V2             (V2)
 import           DoGame.Input.Keyboard (Key(..))
 import qualified DoGame.Cmd as Cmd
 
+class Engine e where
+  -- | Renders the current scene to the window bound to this engine
+  render      :: e -> Scene e -> IO ()
+  -- | Ticks the engine forward, managing events and render cycles
+  tick        :: e -> IO (Maybe e)
+  -- | Performs any necessary cleanup of resources the engine is holding
+  cleanup     :: e -> IO ()
+  -- | Returns the size of the window as a pair of x, y coordinates
+  windowSize  :: e -> IO (V2 Int)
+  -- | Gets the amount of time the engine has been live for, in seconds
+  runningTime :: e -> IO Double
+  -- TODO: Implement signal management here.
+
 data Sub a
   = Sub a
 
@@ -27,7 +40,7 @@ data Game e m a
     , inputState   :: InputState
     }
 
-data Scene e a = Scene
+data Scene e = Scene
 
 -- | The configuration for a game, namely the functions needed to power the runtime for your game
 data GameLifecycle e m a
@@ -37,3 +50,4 @@ data GameLifecycle e m a
     , viewFn        :: m -> Scene e a
     , subscriptions :: Sub a
     }
+
