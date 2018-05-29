@@ -53,6 +53,10 @@ library
   -- Modules exported by the library.
   exposed-modules:   DoGame
                    , DoGame.Cmd
+                   , DoGame.Engine
+                   , DoGame.Engine.SDL
+                   , DoGame.Engine.Event
+                   , DoGame.Input.Keyboard
                       
 
   -- Modules included in this library but not exported.

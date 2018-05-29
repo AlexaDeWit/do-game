@@ -4,6 +4,7 @@ module DoGame.Engine
   , Scene(..)
   , Game(..)
   , GameLifecycle(..)
+  , Engine(..)
   ) where
 
 import           Linear.V2             (V2)
@@ -12,7 +13,7 @@ import qualified DoGame.Cmd as Cmd
 
 class Engine e where
   -- | Renders the current scene to the window bound to this engine
-  render      :: e -> Scene e -> IO ()
+  render      :: e -> Scene e a -> IO ()
   -- | Ticks the engine forward, managing events and render cycles
   tick        :: e -> IO (Maybe e)
   -- | Performs any necessary cleanup of resources the engine is holding
@@ -40,7 +41,7 @@ data Game e m a
     , inputState   :: InputState
     }
 
-data Scene e = Scene
+data Scene e a = Scene
 
 -- | The configuration for a game, namely the functions needed to power the runtime for your game
 data GameLifecycle e m a

@@ -4,10 +4,10 @@ module DoGame
 
 import           FRP.Elerea.Simple
 import           Control.Monad         (forever, void)
-import           DoGame.Engine         (GameLifecycle(..), initConst, Game(..))
+import           DoGame.Engine         (GameLifecycle(..), initConst, Game(..), Engine)
 
 runGame :: Engine e => e -> GameLifecycle e m a -> IO ()
-runGame lifeCycle@GameLifecycle{ initConst } = forever $ void $ pure 5 where
+runGame e lifeCycle@GameLifecycle{ initConst } = forever $ void $ pure 5 where
   game = Game (fst initConst) lifeCycle True
 
 

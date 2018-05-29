@@ -1,4 +1,4 @@
-module DoGame.Engine.Sdl
+module DoGame.Engine.SDL
   (
   )
 
