@@ -9,6 +9,7 @@ module DoGame.Engine
 
 import           Linear.V2             (V2)
 import           DoGame.Input.Keyboard (Key(..))
+import           DoGame.Engine.Sub     (Sub(..))
 import qualified DoGame.Cmd as Cmd
 
 class Engine e where
@@ -23,9 +24,6 @@ class Engine e where
   -- | Gets the amount of time the engine has been live for, in seconds
   runningTime :: e -> IO Double
   -- TODO: Implement signal management here.
-
-data Sub a
-  = Sub a
 
 data InputState
   = InputState

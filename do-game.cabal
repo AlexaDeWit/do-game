@@ -54,9 +54,11 @@ library
   exposed-modules:   DoGame
                    , DoGame.Cmd
                    , DoGame.Engine
+                   , DoGame.Engine.Sub
                    , DoGame.Engine.SDL
                    , DoGame.Engine.Event
                    , DoGame.Input.Keyboard
+                   , DoGame.Input.Mouse
                       
 
   -- Modules included in this library but not exported.

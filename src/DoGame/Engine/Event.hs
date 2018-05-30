@@ -1,5 +1,5 @@
 module DoGame.Engine.Event
-  (
+  ( Event(..)
   ) where
 
 import           Linear.V2             (V2)
